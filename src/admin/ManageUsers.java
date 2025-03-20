@@ -1,6 +1,10 @@
 package admin;
-import javax.swing.*;
+import database.DatabaseConnection;
 import java.awt.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.*;
 
 class ManageUsers extends JFrame {
     public ManageUsers() {

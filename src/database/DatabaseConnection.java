@@ -1,7 +1,12 @@
+package database;
+
 import java.sql.*;
 
-class DatabaseConnection {
-    private static final String URL = "jdbc:mysql://LAPTOP-PNN92MKH:3306/library";
+
+public class DatabaseConnection {
+
+
+    private static final String URL = "jdbc:mysql://localhost:3306/library";
     private static final String USER = "root";
     private static final String PASSWORD = "redhat";
     
