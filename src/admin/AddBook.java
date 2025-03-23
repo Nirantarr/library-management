@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class AddBook extends JFrame {
-    private JTextField titleField, authorField, yearField;
+    private JTextField titleField, authorField,genreField,stockField;
     private JButton addButton;
 
     public AddBook() {
@@ -24,9 +24,13 @@ public class AddBook extends JFrame {
         authorField = new JTextField();
         add(authorField);
 
-        add(new JLabel("Year:"));
-        yearField = new JTextField();
-        add(yearField);
+        add(new JLabel("Genre:"));
+        genreField = new JTextField();
+        add(genreField);
+
+        add(new JLabel("stock:"));
+        stockField = new JTextField();
+        add(stockField);
 
         addButton = new JButton("Add Book");
         add(addButton);
@@ -39,16 +43,23 @@ public class AddBook extends JFrame {
 
     private void addBookToDB() {
         try (Connection con = DatabaseConnection.getConnection()) {
-            String query = "INSERT INTO books (title, author, year) VALUES (?, ?, ?)";
+            String query = "INSERT INTO books (title, author, genre, stock) VALUES (?, ?, ?, ?)";
             PreparedStatement pst = con.prepareStatement(query);
-            pst.setString(1, titleField.getText());
-            pst.setString(2, authorField.getText());
-            pst.setInt(3, Integer.parseInt(yearField.getText()));
-            pst.executeUpdate();
+
+            pst.setString(1, titleField.getText());  // Set book title
+            pst.setString(2, authorField.getText()); // Set author name
+            pst.setString(3, genreField.getText());  // Set book genre
+            pst.setInt(4, Integer.parseInt(stockField.getText())); // Set stock quantity
+
+            pst.executeUpdate(); // Execute the query
             JOptionPane.showMessageDialog(this, "Book Added Successfully");
             dispose();
         } catch (SQLException ex) {
             ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error adding book: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Stock must be a number!", "Input Error", JOptionPane.WARNING_MESSAGE);
         }
     }
+
 }

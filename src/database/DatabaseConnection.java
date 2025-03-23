@@ -12,10 +12,7 @@ public class DatabaseConnection {
     
     public static Connection getConnection() throws SQLException {
         try {
-            // ✅ Load the MySQL Driver
-            System.out.println("line 1");
             Class.forName("com.mysql.cj.jdbc.Driver");
-            System.out.println("line 2");  
             return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (ClassNotFoundException e) {
             throw new SQLException("MySQL Driver not found. Add the JDBC driver to your project.");

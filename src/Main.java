@@ -1,9 +1,9 @@
-import pages.adminWindow;
-import pages.studentWindow;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
+import pages.adminWindow;
+import pages.studentWindow;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,12 +16,14 @@ public class Main {
         JButton studentButton = new JButton("Student");
 
         adminButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 new adminWindow();
             }
         });
 
         studentButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 new studentWindow();
             }
